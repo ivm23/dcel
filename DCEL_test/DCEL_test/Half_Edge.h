@@ -13,8 +13,11 @@ public:
 		next(NULL),
 		prev(NULL),
 		origin(NULL),
-		face(NULL)
+		face(NULL),
+		global_next(NULL),
+		global_prev(NULL)
 	{}
+	~Half_Edge() {};
 
 	inline Half_Edge * get_twin() const {
 		return this->twin;
@@ -56,10 +59,17 @@ public:
 		this->face = new_face;
 	}
 
+	friend class Mesh;
+
 private: 
 	Half_Edge * twin;
 	Half_Edge * next;
 	Half_Edge * prev;
 	Vertex * origin;
 	Face * face;
+
+protected:
+
+	Half_Edge * global_next;
+	Half_Edge * global_prev;
 };

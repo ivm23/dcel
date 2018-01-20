@@ -8,8 +8,11 @@ public:
 
 	Vertex() :
 		vertex_coordinates(),
-		incident_half_edge(NULL)
+		incident_half_edge(NULL),
+		global_next(NULL),
+		global_prev(NULL)
 	{}
+	~Vertex() {};
 
 	inline Half_Edge * get_incident_half_edge() const {
 		return this->incident_half_edge;
@@ -27,8 +30,13 @@ public:
 		this->vertex_coordinates = coordinates;
 	}
 
+	friend class Mesh;
+
 private:
 	std::pair<double, double> vertex_coordinates;
 	Half_Edge * incident_half_edge;
 
+protected:
+	Vertex * global_next;
+	Vertex * global_prev;
 };

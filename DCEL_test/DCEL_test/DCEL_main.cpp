@@ -1,7 +1,8 @@
-#include "Vertex.h"
-#include "Face.h"
-#include "Half_Edge.h"
+#include "Mesh.h"
+#include <iostream>
 
+using namespace std;
 int main() {
+
 	return 0;
 }
