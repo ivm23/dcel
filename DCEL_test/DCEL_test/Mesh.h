@@ -13,18 +13,6 @@ public:
 	Mesh();
 	~Mesh();
 
-	Face* first_face() { return face_list; };
-	Face* next (Face* face) { return (face != NULL) ? face->global_next : NULL; };
-	void advance(Face* &face) { face = (face != NULL) ? face->global_next : NULL; };
-
-	Vertex* first_vertex() { return vertex_list; };
-	Vertex* next (Vertex* vertex) { return (vertex != NULL) ? vertex->global_next : NULL; };
-	void advance(Vertex* &vertex) { vertex = (vertex != NULL) ? vertex->global_next : NULL; };
-
-	Half_Edge* first_half_edge() { return half_edge_list; };
-	Half_Edge* next(Half_Edge* half_edge) { return (half_edge != NULL) ? half_edge->global_next : NULL; };
-	void advance(Half_Edge* &half_edge) { half_edge = (half_edge != NULL) ? half_edge->global_next : NULL; };
-
 	void clear();
 	
 	bool is_empty() const;
@@ -37,25 +25,37 @@ public:
 	void remove(Face * face);
 	void remove(Half_Edge * half_edge);
 
+	inline std::list<Vertex*> get_vertex_list() {
+		return vertex_list;
+	}
+
+	inline std::list<Face*> get_face_list() {
+		return face_list;
+	}
+
+	inline std::list<Half_Edge*> get_half_edge_list() {
+		return half_edge_list;
+	}
+
 	inline unsigned int get_num_faces() const { 
-		return num_faces;
+		return face_list.size();
 	}
 
 	inline unsigned int get_num_vertices() const { 
-		return num_vertices;
+		return vertex_list.size();
 	}
 
 	inline unsigned int get_num_half_edges() const { 
-		return num_half_edges;
+		return half_edge_list.size();
 	}
 
 
 private:
-	Face * face_list;
-	Vertex * vertex_list;
-	Half_Edge * half_edge_list;
+	std::list<Face *> face_list;
+	std::list<Vertex *> vertex_list;
+	std::list<Half_Edge *> half_edge_list;
 
-	unsigned int num_faces;
-	unsigned int num_vertices;
-	unsigned int num_half_edges;
+	//unsigned int num_faces;
+	//unsigned int num_vertices;
+	//unsigned int num_half_edges;
 };
